@@ -269,4 +269,4 @@ setInterval(async () => {
     console.log('[RESTART] Gagal ambil state:', err.message);
     process.exit();
   }
-}, 30000); // cek tiap 30 detik
+}, 60000); // cek tiap 1 menit
