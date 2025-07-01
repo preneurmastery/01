@@ -256,3 +256,17 @@ client.on('disconnected', (reason) => {
   console.log('❌ WhatsApp terputus:', reason);
   process.exit(); // biarkan PM2 atau Render restart
 });
+
+setInterval(async () => {
+  try {
+    const state = await client.getState();
+    console.log(`[PING] Bot state: ${state}`);
+    if (state !== 'CONNECTED') {
+      console.log('[RESTART] State bukan CONNECTED, force exit...');
+      process.exit(); // PM2 akan restart otomatis
+    }
+  } catch (err) {
+    console.log('[RESTART] Gagal ambil state:', err.message);
+    process.exit();
+  }
+}, 30000); // cek tiap 30 detik
